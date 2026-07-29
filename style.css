@@ -1,0 +1,387 @@
+/* Переменные темы Dark (по умолчанию) */
+:root {
+    --bg-main: #121214;
+    --bg-card: #1e1e24;
+    --bg-input: #2a2a32;
+    --text-primary: #f0f0f5;
+    --text-secondary: #a0a0b0;
+    --border-color: #33333d;
+    --accent-blue: #3b82f6;
+    --accent-green: #10b981;
+    --accent-danger: #ef4444;
+}
+
+/* Тема Light (Светлая) */
+[data-theme="light"] {
+    --bg-main: #f4f5f7;
+    --bg-card: #ffffff;
+    --bg-input: #e5e7eb;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #d1d5db;
+    --accent-blue: #2563eb;
+    --accent-green: #059669;
+    --accent-danger: #dc2626;
+}
+
+/* Тема WinRAR (Изумрудно-зеленые тона) */
+[data-theme="winrar"] {
+    --bg-main: #0a1f14;
+    --bg-card: #123321;
+    --bg-input: #07170e;
+    --text-primary: #f0fdf4;
+    --text-secondary: #86efac;
+    --border-color: #1e5235;
+    --accent-blue: #16a34a;
+    --accent-green: #22c55e;
+    --accent-danger: #ef4444;
+}
+
+/* Тема Suno AI (Фиолетовый неон и фуксия) */
+[data-theme="suno"] {
+    --bg-main: #0f0814;
+    --bg-card: #1c102b;
+    --bg-input: #12051f;
+    --text-primary: #f5f3ff;
+    --text-secondary: #c084fc;
+    --border-color: #3b1f5e;
+    --accent-blue: #a855f7;
+    --accent-green: #10b981;
+    --accent-danger: #f43f5e;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    padding-bottom: 40px;
+}
+
+.main-header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.main-header h1 {
+    font-size: 1.4rem;
+}
+
+.user-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.select-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-select, input, select {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    outline: none;
+}
+
+.container {
+    max-width: 800px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+/* Навигация */
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    background-color: var(--accent-blue);
+    color: #ffffff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Карточки */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+/* Формы */
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-actions, .setting-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Кнопки */
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary { background-color: var(--accent-blue); color: #fff; }
+.btn-secondary { background-color: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border-color); }
+.btn-danger { background-color: var(--accent-danger); color: #fff; }
+
+.btn-file-input {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.btn-file-input input[type="file"] {
+    position: absolute;
+    left: 0; top: 0; opacity: 0;
+    cursor: pointer; width: 100%; height: 100%;
+}
+
+/* Списки задач */
+.habits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.habit-item {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.habit-info h3 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.habit-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.habit-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.counter-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+/* Стили Календаря */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.calendar-grid-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+/* Подсветка субботы и воскресенья в заголовке */
+.weekend-header {
+    color: var(--accent-danger) !important;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-day {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    min-height: 58px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+/* Подсветка числа в субботу и воскресенье */
+.calendar-day.weekend .day-number {
+    color: var(--accent-danger);
+    font-weight: bold;
+}
+
+.calendar-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+.calendar-day.today {
+    border-color: var(--accent-blue);
+    border-width: 2px;
+}
+
+.calendar-day.selected {
+    outline: 2px solid var(--accent-blue);
+}
+
+.day-number {
+    font-size: 0.85rem;
+}
+
+.day-badge {
+    font-size: 0.7rem;
+    align-self: flex-start;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.badge-full { background-color: var(--accent-green); color: #fff; }
+.badge-partial { background-color: var(--accent-blue); color: #fff; }
+.badge-holiday { background-color: var(--accent-danger); color: #fff; }
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    justify-content: flex-end;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.stat-box {
+    background-color: var(--bg-input);
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-blue);
+}
