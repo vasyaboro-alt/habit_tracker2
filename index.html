@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker v4.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>Трекер Привычек v4.0</h1>
+        
+        <div class="user-bar">
+            <div class="select-group">
+                <label for="user-select">Пользователь:</label>
+                <select id="user-select" class="user-select"></select>
+            </div>
+            <button id="btn-add-user" class="btn btn-secondary">+ Новая профиль</button>
+            <button id="btn-edit-user" class="btn btn-secondary">✏️ Профиль</button>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Навигационные вкладки -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="tab-today">📅 Сегодня</button>
+            <button class="tab-btn" data-tab="tab-calendar">📆 Календарь</button>
+            <button class="tab-btn" data-tab="tab-habits">⚙️ Управление привычками</button>
+            <button class="tab-btn" data-tab="tab-stats">📊 Статистика</button>
+            <button class="tab-btn" data-tab="tab-settings">⚙️ Настройки</button>
+        </nav>
+
+        <!-- Вкладка 1: Сегодня -->
+        <main id="tab-today" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="current-date-title">Задачи на сегодня</h2>
+                </div>
+                <div id="today-habits-list" class="habits-list"></div>
+            </div>
+        </main>
+
+        <!-- Вкладка 2: Календарь -->
+        <main id="tab-calendar" class="tab-content">
+            <div class="card">
+                <div class="calendar-header">
+                    <button id="btn-prev-month" class="btn btn-secondary">←</button>
+                    <h2 id="calendar-month-year">Месяц Год</h2>
+                    <div class="select-group">
+                        <label for="country-select">Страна:</label>
+                        <select id="country-select" class="user-select">
+                            <option value="BY">[BY] Беларусь</option>
+                            <option value="RU">[RU] Россия</option>
+                        </select>
+                    </div>
+                    <button id="btn-next-month" class="btn btn-secondary">→</button>
+                </div>
+                <div class="calendar-grid-header">
+                    <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div class="weekend-header">Сб</div><div class="weekend-header">Вс</div>
+                </div>
+                <div id="calendar-grid" class="calendar-grid"></div>
+            </div>
+
+            <div class="card" id="selected-day-card" style="display: none;">
+                <div class="card-header">
+                    <h3 id="selected-day-title">Прогресс за выбранный день</h3>
+                </div>
+                <div id="selected-day-habits-list" class="habits-list"></div>
+            </div>
+        </main>
+
+        <!-- Вкладка 3: Управление привычками -->
+        <main id="tab-habits" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Создать / Редактировать привычку</h2>
+                </div>
+                <form id="habit-form">
+                    <input type="hidden" id="habit-id">
+                    
+                    <div class="form-group">
+                        <label for="habit-title">Название привычки:</label>
+                        <input type="text" id="habit-title" required placeholder="Например: Питание без сахара">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="habit-category">Категория:</label>
+                        <select id="habit-category">
+                            <option value="Здоровье">Здоровье</option>
+                            <option value="Спорт">Спорт</option>
+                            <option value="Обучение">Обучение</option>
+                            <option value="Продуктивность">Продуктивность</option>
+                            <option value="Другое">Другое</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="habit-period">Периодичность:</label>
+                            <select id="habit-period">
+                                <option value="daily">Каждый день</option>
+                                <option value="interval">Раз в N дней</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="group-interval-days" style="display: none;">
+                            <label for="habit-interval-days">Интервал (дней):</label>
+                            <input type="number" id="habit-interval-days" min="2" value="2">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="habit-target">Цель в день:</label>
+                            <input type="number" id="habit-target" min="1" value="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="habit-unit">Единица измерения:</label>
+                            <input type="text" id="habit-unit" placeholder="раз, км, минут, страниц" value="раз">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="habit-reminder">Время напоминания:</label>
+                        <input type="time" id="habit-reminder">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="btn-save-habit" class="btn btn-primary">Сохранить привычку</button>
+                        <button type="button" id="btn-cancel-habit" class="btn btn-secondary" style="display: none;">Отмена</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Список текущих привычек</h2>
+                </div>
+                <div id="all-habits-list" class="habits-list"></div>
+            </div>
+        </main>
+
+        <!-- Вкладка 4: Статистика -->
+        <main id="tab-stats" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Общий прогресс профиля</h2>
+                </div>
+                <div id="stats-summary" class="stats-grid"></div>
+            </div>
+        </main>
+
+        <!-- Вкладка 5: Настройки -->
+        <main id="tab-settings" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Внешний вид и Оформление</h2>
+                </div>
+                <div class="setting-item">
+                    <label for="theme-select">Тема оформления:</label>
+                    <select id="theme-select" class="user-select">
+                        <option value="dark">Тёмная (Классика)</option>
+                        <option value="light">Светлая</option>
+                        <option value="winrar">Зелёный WinRAR</option>
+                        <option value="suno">Suno AI (Фиолетовый неон)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Уведомления</h2>
+                </div>
+                <div class="setting-item">
+                    <button id="btn-request-notifications" class="btn btn-secondary">Включить системные уведомления</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Резервное копирование (Backup)</h2>
+                </div>
+                <div class="setting-actions">
+                    <button id="btn-export-data" class="btn btn-primary">Скачать бэкап (JSON)</button>
+                    <label class="btn btn-secondary btn-file-input">
+                        Восстановить из файла
+                        <input type="file" id="input-import-data" accept=".json">
+                    </label>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Модальное окно профиля -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-user-title">Добавить профиль</h3>
+            <div class="form-group">
+                <label for="modal-user-name">Имя пользователя:</label>
+                <input type="text" id="modal-user-name" placeholder="Введите имя">
+            </div>
+            <div class="modal-actions">
+                <button id="btn-modal-user-save" class="btn btn-primary">Сохранить</button>
+                <button id="btn-modal-user-delete" class="btn btn-danger" style="display: none;">Удалить профиль</button>
+                <button id="btn-modal-user-close" class="btn btn-secondary">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
